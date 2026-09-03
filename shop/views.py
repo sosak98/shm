@@ -119,6 +119,11 @@ def panier(request):
     return render(request, 'shop/panier.html')
 
 
+def health_check(request):
+    """Keep-alive endpoint pour UptimeRobot / Cron-job (évite la mise en veille)."""
+    return JsonResponse({'status': 'ok', 'shop': settings.SHOP_NAME})
+
+
 # ---------------------------------------------------------------------------
 # PWA : application installable et mode hors ligne
 # ---------------------------------------------------------------------------

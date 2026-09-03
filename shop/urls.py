@@ -13,4 +13,7 @@ urlpatterns = [
     # 📲 PWA : servis à la racine pour une portée '/'
     path('manifest.json', views.manifest_json, name='manifest'),
     path('sw.js', views.service_worker, name='sw'),
+    # ⚡ Keep-Alive / Anti-sommeil
+    path('health/', views.health_check, name='health'),
+    path('ping/', views.health_check, name='ping'),
 ]
