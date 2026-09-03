@@ -1,0 +1,10 @@
+# SHM Shop : dépendances
+# En local comme en production : pip install -r requirements.txt
+Django>=5.0
+Pillow>=10.0
+
+# Production (inoffensifs en local) :
+whitenoise>=6.6        # sert les fichiers statiques
+dj-database-url>=2.0   # lit DATABASE_URL (PostgreSQL Neon/Render)
+gunicorn>=21.0         # serveur de production
+psycopg[binary]>=3.1   # pilote PostgreSQL

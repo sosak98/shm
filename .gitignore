@@ -1,0 +1,15 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+db.sqlite3
+staticfiles/
+
+# Environnement local
+.env
+.venv/
+venv/
+
+# Divers
+*.log
+.DS_Store
+Thumbs.db

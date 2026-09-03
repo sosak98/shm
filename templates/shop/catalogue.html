@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load shop_tags %}
+
+{% block title %}{% if selected_cat %}{{ selected_cat.name }} : {{ SHOP_NAME }}{% else %}Catalogue : {{ SHOP_NAME }}{% endif %}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    {% if selected_cat %}
+      <h1>{{ selected_cat.icon }} {{ selected_cat.name }}</h1>
+      <p>{{ selected_cat.description }} ({{ produits.count }} pagne{{ produits.count|pluralize }})</p>
+    {% else %}
+      <h1>✨ Notre catalogue de pagnes</h1>
+      <p>{{ produits.count }} pagne{{ produits.count|pluralize }} disponible{{ produits.count|pluralize }} au catalogue</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    {# Filtres Catégories / Collections #}
+    <div class="category-pills-wrap">
+      <div class="category-pills">
+        <a class="cat-pill {% if not cat_slug %}active{% endif %}" href="{% url 'shop:catalogue' %}{% if filtre %}?f={{ filtre }}{% endif %}">
+          Tout le catalogue
+        </a>
+        {% for cat in categories %}
+        <a class="cat-pill {% if cat_slug == cat.slug %}active{% endif %}" href="?cat={{ cat.slug }}{% if filtre %}&f={{ filtre }}{% endif %}">
+          {{ cat.icon }} {{ cat.name }} ({{ cat.products.count }})
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    {# Barre de filtres et recherche #}
+    <div class="filter-bar">
+      <div class="pills">
+        <a class="pill {% if not filtre %}active{% endif %}" href="?{% if cat_slug %}cat={{ cat_slug }}{% endif %}">Tous</a>
+        <a class="pill {% if filtre == 'nouveautes' %}active{% endif %}" href="?{% if cat_slug %}cat={{ cat_slug }}&{% endif %}f=nouveautes">✨ Nouveautés</a>
+        <a class="pill {% if filtre == 'promos' %}active{% endif %}" href="?{% if cat_slug %}cat={{ cat_slug }}&{% endif %}f=promos">🔥 Promotions</a>
+        <a class="pill {% if filtre == 'disponibles' %}active{% endif %}" href="?{% if cat_slug %}cat={{ cat_slug }}&{% endif %}f=disponibles">✅ En stock</a>
+      </div>
+
+      <form class="filter-form" method="get">
+        {% if cat_slug %}<input type="hidden" name="cat" value="{{ cat_slug }}">{% endif %}
+        {% if filtre %}<input type="hidden" name="f" value="{{ filtre }}">{% endif %}
+        <input type="search" name="q" value="{{ q }}" placeholder="Rechercher un pagne, couleur..." aria-label="Rechercher">
+        <select name="prix" aria-label="Filtrer par prix">
+          <option value="">Tous les prix</option>
+          <option value="6500" {% if prix == '6500' %}selected{% endif %}>6 500 FCFA (ABC &amp; Orientar)</option>
+          <option value="chiganvy" {% if prix == 'chiganvy' %}selected{% endif %}>9 000 à 10 000 FCFA (Chiganvy)</option>
+          <option value="moins10" {% if prix == 'moins10' %}selected{% endif %}>Moins de 10 000 FCFA</option>
+          <option value="10plus" {% if prix == '10plus' %}selected{% endif %}>10 000 FCFA et plus</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Filtrer</button>
+      </form>
+    </div>
+
+    <div class="grid-products">
+      {% for product in produits %}
+        {% include 'shop/_card.html' with product=product %}
+      {% empty %}
+        <div class="empty">
+          <div class="empty-emoji">🧺</div>
+          <p>Aucun pagne ne correspond à votre recherche.</p>
+          <a class="btn btn-outline btn-sm" href="{% url 'shop:catalogue' %}">Voir tout le catalogue</a>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

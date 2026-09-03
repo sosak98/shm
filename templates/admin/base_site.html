@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:'SHM Shop' }}{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/admin-modern.css' %}">
+  <link rel="icon" href="{% static 'icons/icon-192.png' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}" class="admin-brand-link">
+    <img src="{% static 'icons/icon-192.png' %}" alt="Logo SHM" class="admin-brand-icon">
+    <div class="admin-brand-info">
+      <span class="admin-brand-name">SHM SHOP</span>
+      <span class="admin-brand-tag">Espace Gestion &amp; Catalogue</span>
+    </div>
+  </a>
+</div>
+{% endblock %}
+
+{% block userlinks %}
+  <a href="{% url 'shop:home' %}" class="admin-top-link" target="_blank" rel="noopener">
+    🌐 Voir la boutique
+  </a>
+  <span class="admin-sep">•</span>
+  {{ block.super }}
+{% endblock %}

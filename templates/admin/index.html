@@ -1,0 +1,234 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static shop_tags %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/admin-modern.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+
+  {# ---------- Bannière d'accueil vendeuse ---------- #}
+  <div class="dash-welcome">
+    <div class="dash-welcome-text">
+      <h2>Tableau de Bord SHM Shop ✨</h2>
+      <p>Bienvenue dans votre espace d'administration. Ajoutez de nouveaux pagnes, ajustez vos prix et suivez vos disponibilités en temps réel.</p>
+    </div>
+    <div class="dash-welcome-actions">
+      <a href="{% url 'admin:shop_product_add' %}" class="btn-dash-primary">
+        <span>➕</span> Ajouter un pagne
+      </a>
+      <a href="{% url 'shop:home' %}" class="btn-dash-outline" target="_blank" rel="noopener">
+        <span>🌐</span> Voir la boutique
+      </a>
+    </div>
+  </div>
+
+  {# ---------- Cartes KPI / Statistiques ---------- #}
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-total">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-data">
+        <span class="kpi-label">Total Pagnes</span>
+        <strong class="kpi-value">{{ total_products|default:"0" }}</strong>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-available">
+      <div class="kpi-icon">🟢</div>
+      <div class="kpi-data">
+        <span class="kpi-label">Disponibles</span>
+        <strong class="kpi-value">{{ available_count|default:"0" }}</strong>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-out">
+      <div class="kpi-icon">🔴</div>
+      <div class="kpi-data">
+        <span class="kpi-label">Épuisés</span>
+        <strong class="kpi-value">{{ out_of_stock_count|default:"0" }}</strong>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-promo">
+      <div class="kpi-icon">🔥</div>
+      <div class="kpi-data">
+        <span class="kpi-label">En Promotion</span>
+        <strong class="kpi-value">{{ promos_count|default:"0" }}</strong>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-new">
+      <div class="kpi-icon">✨</div>
+      <div class="kpi-data">
+        <span class="kpi-label">Nouveautés</span>
+        <strong class="kpi-value">{{ new_count|default:"0" }}</strong>
+      </div>
+    </div>
+  </div>
+
+  {# ---------- Grille principale du Dashboard ---------- #}
+  <div class="dash-main-grid">
+
+    {# Colonne Gauche : Derniers pagnes du catalogue #}
+    <div class="dash-card dash-card-wide">
+      <div class="dash-card-header">
+        <div class="dash-card-title">
+          <h3>👗 Pagnes récents au catalogue</h3>
+          <span class="dash-badge">{{ total_products }} au total</span>
+        </div>
+        <a href="{% url 'admin:shop_product_changelist' %}" class="dash-link-more">
+          Voir tout le catalogue →
+        </a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Aperçu</th>
+              <th>Réf. &amp; Nom</th>
+              <th>Prix</th>
+              <th>Disponibilité</th>
+              <th>Badges</th>
+              <th style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for prod in recents %}
+            <tr>
+              <td style="width: 54px;">
+                {% if prod.image %}
+                  <img src="{{ prod.image.url }}" alt="{{ prod.name }}" class="dash-thumb">
+                {% else %}
+                  <div class="dash-thumb-placeholder">📷</div>
+                {% endif %}
+              </td>
+              <td>
+                <strong class="dash-prod-name">{{ prod.name }}</strong>
+                <span class="dash-prod-ref">Réf. {{ prod.reference }}</span>
+              </td>
+              <td>
+                <span class="dash-price">{{ prod.price|fcfa }}</span>
+                {% if prod.old_price %}
+                  <span class="dash-old-price">{{ prod.old_price|fcfa }}</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if prod.is_available %}
+                  <span class="dash-tag tag-ok">En stock</span>
+                {% else %}
+                  <span class="dash-tag tag-out">Épuisé</span>
+                {% endif %}
+              </td>
+              <td>
+                <div class="dash-tags-group">
+                  {% if prod.is_new %}<span class="dash-tag tag-new">Nouveau</span>{% endif %}
+                  {% if prod.is_promo %}<span class="dash-tag tag-promo">Promo</span>{% endif %}
+                  {% if not prod.is_new and not prod.is_promo %}<span class="dash-tag-muted">-</span>{% endif %}
+                </div>
+              </td>
+              <td style="text-align: right;">
+                <a href="{% url 'admin:shop_product_change' prod.id %}" class="btn-dash-edit">
+                  ✏️ Modifier
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" class="dash-empty">
+                Aucun pagne pour le moment. <a href="{% url 'admin:shop_product_add' %}">Ajouter le premier pagne</a>.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {# Colonne Droite : Infos WhatsApp & Raccourcis #}
+    <div class="dash-side-col">
+      
+      {# Widget WhatsApp & Contact #}
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title">
+            <h3>💬 Canal de Commande</h3>
+          </div>
+        </div>
+        <div class="dash-info-box">
+          <div class="dash-info-row">
+            <span class="dash-info-label">💬 WhatsApp commandes :</span>
+            <strong class="dash-info-val">{{ shop_whatsapp_display }}</strong>
+          </div>
+          <div class="dash-info-row">
+            <span class="dash-info-label">📞 Appels directs :</span>
+            <strong class="dash-info-val">{{ shop_phone_display }}</strong>
+          </div>
+          <div class="dash-info-row">
+            <span class="dash-info-label">📍 Adresse :</span>
+            <strong class="dash-info-val">{{ shop_address }}</strong>
+          </div>
+          <div class="dash-info-row">
+            <span class="dash-info-label">🕒 Horaires :</span>
+            <strong class="dash-info-val">{{ shop_hours }}</strong>
+          </div>
+        </div>
+        <p class="dash-tip">
+          💡 <em>Toutes les commandes des clients sur le site arrivent directement sur ce WhatsApp avec le nom du pagne, la référence et le total.</em>
+        </p>
+      </div>
+
+      {# Widget Accès Rapides #}
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title">
+            <h3>⚡ Actions Rapides</h3>
+          </div>
+        </div>
+        <div class="dash-quick-links">
+          <a href="{% url 'admin:shop_product_add' %}" class="dash-quick-item">
+            <span class="dash-quick-icon">➕</span>
+            <div>
+              <strong>Ajouter un nouveau pagne</strong>
+              <small>Mettre en ligne une nouvelle référence</small>
+            </div>
+          </a>
+          <a href="{% url 'admin:shop_category_changelist' %}" class="dash-quick-item">
+            <span class="dash-quick-icon">🏷️</span>
+            <div>
+              <strong>Gérer les catégories &amp; collections</strong>
+              <small>{{ categories_count }} collection{{ categories_count|pluralize }} active{{ categories_count|pluralize }}</small>
+            </div>
+          </a>
+          <a href="{% url 'admin:shop_product_changelist' %}" class="dash-quick-item">
+            <span class="dash-quick-icon">👗</span>
+            <div>
+              <strong>Gérer tous les pagnes</strong>
+              <small>Modifier prix, photos et stocks</small>
+            </div>
+          </a>
+          <a href="{% url 'shop:catalogue' %}" class="dash-quick-item" target="_blank" rel="noopener">
+            <span class="dash-quick-icon">🛒</span>
+            <div>
+              <strong>Voir le catalogue client</strong>
+              <small>Tester les filtres et le panier</small>
+            </div>
+          </a>
+          <a href="{% url 'admin:auth_user_changelist' %}" class="dash-quick-item">
+            <span class="dash-quick-icon">🔐</span>
+            <div>
+              <strong>Comptes administrateurs</strong>
+              <small>Gérer les accès et mots de passe</small>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

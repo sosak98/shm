@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load shop_tags %}
+
+{% block title %}Contact : {{ SHOP_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>📞 Nous contacter</h1>
+    <p>Une question, une commande ? Nous répondons vite, surtout sur WhatsApp.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+
+    <div class="contact-card">
+      <div class="contact-icon icon-wa">💬</div>
+      <h3>WhatsApp Commandes</h3>
+      <p class="contact-value">{{ SHOP_WHATSAPP_DISPLAY }}</p>
+      <p>Le moyen le plus rapide de commander ou vérifier la disponibilité d’un pagne.</p>
+      <a class="btn btn-whatsapp" href="{% whatsapp_link %}" target="_blank" rel="noopener">Discuter sur WhatsApp</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h3>Ligne Téléphonique (Appels)</h3>
+      <p class="contact-value">{{ SHOP_PHONE_DISPLAY }}</p>
+      <p>{{ SHOP_HOURS }}</p>
+      <a class="btn btn-outline" href="tel:{{ SHOP_PHONE_TEL }}">Appeler directement</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <h3>La boutique</h3>
+      <p class="contact-value">{{ SHOP_ADDRESS }}</p>
+      <p>{{ SHOP_HOURS }}<br>Retrait en boutique possible après commande.</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">📸</div>
+      <h3>Réseaux sociaux</h3>
+      <p class="contact-value">Suivez les nouveautés</p>
+      <p>Nouveaux pagnes, promotions et coulisses de la boutique.</p>
+      <p class="social-links">
+        <a class="btn btn-outline btn-sm" href="{{ SHOP_INSTAGRAM }}" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-outline btn-sm" href="{{ SHOP_FACEBOOK }}" target="_blank" rel="noopener">Facebook</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="banner-cta">
+      <div>
+        <h2>Un pagne vous plaît ?</h2>
+        <p>Parcourez le catalogue et envoyez-nous sa référence en un clic.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="{% url 'shop:catalogue' %}">Voir le catalogue</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
