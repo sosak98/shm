@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: shm-shop
+    runtime: python
+    region: frankfurt
+    plan: free
+    branch: main
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py load_demo"
+    startCommand: "gunicorn shmshop.wsgi:application"
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "0"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: SHOP_WHATSAPP
+        value: "22996437708"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false

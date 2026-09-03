@@ -8,7 +8,7 @@ from .models import Category, Product
 
 # Filtres de prix du catalogue (?prix=...)
 PRIX_FILTRES = {
-    '6500': {'label': '6 500 FCFA (ABC & Orientar)', 'min': 6000, 'max': 7000},
+    '6500': {'label': '6 500 FCFA (ABC Wax)', 'min': 6000, 'max': 7000},
     'chiganvy': {'label': '9 000 à 10 000 FCFA (Super Chiganvy)', 'min': 9000, 'max': 10500},
     'moins10': {'label': 'Moins de 10 000 FCFA', 'max': 10000},
     '10plus': {'label': '10 000 FCFA et plus', 'min': 10000},

@@ -11,9 +11,8 @@ Client -> Catalogue -> Pagne -> 🧺 Panier -> [ Commander ] -> 📱 WhatsApp ->
 
 ## ✨ Collections disponibles (35 pagnes réels avec photos)
 
-1. ✨ **Véritable ABC Wax (Block Prints)** : 16 pagnes à **6 500 FCFA**
-2. 👑 **Orientar Kingtex** : 9 pagnes à **6 500 FCFA**
-3. 💎 **Super Chiganvy Wax** : 10 pagnes à **9 000 FCFA / 10 000 FCFA**
+1. ✨ **Véritable ABC Wax** : 25 pagnes à **6 500 FCFA**
+2. 💎 **Super Chiganvy Wax** : 10 pagnes à **9 000 FCFA / 10 000 FCFA**
 
 ## 📞 Coordonnées de contact
 - 💬 **WhatsApp Commandes :** `+229 96 43 77 08` (commandes 24h/24 et 7j/7)
@@ -28,7 +27,7 @@ Client -> Catalogue -> Pagne -> 🧺 Panier -> [ Commander ] -> 📱 WhatsApp ->
 ```bash
 # 1. Aller dans votre dossier de téléchargement et décompresser
 cd ~/Téléchargements || cd ~/Downloads
-unzip SHM-Shop-v3.zip
+unzip SHM-Shop-Blueprint.zip
 cd shmshop
 
 # 2. Créer un environnement virtuel et installer les dépendances
@@ -53,29 +52,20 @@ python3 manage.py runserver
 cd shmshop
 git init
 git add .
-git commit -m "SHM Shop v3 : catalogue 35 pagnes, panier WhatsApp, PWA et admin moderne"
+git commit -m "SHM Shop : catalogue 35 pagnes, panier WhatsApp, PWA et Blueprint Render"
 git branch -M main
-git remote add origin https://github.com/TON-UTILISATEUR/shm-shop.git
+git remote add origin https://github.com/sosak98/shm.git
 git push -u origin main
 ```
 
-## 🌍 Mettre en ligne GRATUITEMENT (Render + Neon)
+## 🌍 Déploiement Automatique 1-Clic avec Render Blueprint
 
-**1. Base PostgreSQL gratuite : [neon.tech](https://neon.tech)**
-Crée un projet, copie l'URL de connexion (`postgresql://...`).
+Grâce au fichier `render.yaml` inclus à la racine du projet, le déploiement sur Render est automatique :
 
-**2. Hébergement gratuit : [render.com](https://render.com)**
-"New -> Web Service" relié à ton dépôt GitHub, puis :
-
-| Champ / variable      | Valeur |
-|-----------------------|--------|
-| Build Command         | `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py load_demo` |
-| Start Command         | `gunicorn shmshop.wsgi:application` |
-| `DJANGO_DEBUG`        | `0` |
-| `DJANGO_SECRET_KEY`   | *(longue clé aléatoire)* |
-| `DJANGO_ALLOWED_HOSTS`| `ton-app.onrender.com` |
-| `DATABASE_URL`        | *(URL Neon copiée à l'étape 1)* |
-| `SHOP_WHATSAPP`       | `22996437708` |
+1. Sur [Render.com](https://dashboard.render.com/), clique sur **New +** ➡️ **Blueprint**.
+2. Sélectionne ton dépôt GitHub **`sosak98/shm`**.
+3. Render configure tout tout seul ! Il te demande seulement de coller ton **`DATABASE_URL`** (ton URL PostgreSQL Neon).
+4. Clique sur **Apply** et ton site est déployé en direct ! 🎉
 
 ## 🔑 Compte administrateur par défaut
 
@@ -91,6 +81,7 @@ Crée un projet, copie l'URL de connexion (`postgresql://...`).
 
 ```
 shmshop/
+├── render.yaml              # Déploiement automatique 1-clic Render
 ├── manage.py
 ├── requirements.txt
 ├── shmshop/                 # configuration Django (settings, urls)

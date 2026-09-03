@@ -11,14 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-secret-change-me-in-production')
 DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
 
-ALLOWED_HOSTS = ['*'] if DEBUG else os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['*'] if DEBUG else [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '.onrender.com,localhost,127.0.0.1').split(',') if h.strip()]
 
-# Aperçu en ligne derrière un proxy HTTPS (admin + formulaires)
+# Aperçu en ligne et domaines autorisés
 CSRF_TRUSTED_ORIGINS = [
     'https://*.e2b.app',
+    'https://*.onrender.com',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-] + ['https://' + h for h in ALLOWED_HOSTS if h and h != '*']
+] + [('https://' + h.lstrip('.')) for h in ALLOWED_HOSTS if h and h != '*']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 INSTALLED_APPS = [
