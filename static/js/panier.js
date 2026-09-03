@@ -164,8 +164,63 @@
     }
   });
 
+  /* ---------- Menu Mobile (Tiroir Hamburger) ---------- */
+  function initMobileMenu() {
+    var menuBtn = document.getElementById('menu-toggle');
+    var drawer = document.getElementById('mobile-drawer');
+    var backdrop = document.getElementById('drawer-backdrop');
+    var closeBtn = document.getElementById('drawer-close');
+
+    if (!menuBtn || !drawer || !backdrop) { return; }
+
+    function openMenu() {
+      drawer.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      menuBtn.classList.add('is-active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      backdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      drawer.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      menuBtn.classList.remove('is-active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (drawer.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeMenu();
+      });
+    }
+
+    backdrop.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     updateBadge();
     renderCart();
+    initMobileMenu();
   });
 })();

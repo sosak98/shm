@@ -5,7 +5,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{{ SHOP_NAME }} : Pagnes et Wax de qualite{% endblock %}</title>
-  <meta name="description" content="{{ SHOP_NAME }} : boutique catalogue de pagnes africains a Cotonou. Commandez directement sur WhatsApp.">
+  <meta name="description" content="{{ SHOP_NAME }} : boutique catalogue de pagnes africains a Cotonou. Commandez directement sur WhatsApp 24h/24 et 7j/7.">
+
+  <!-- 🌐 Métadonnées Open Graph & Réseaux Sociaux (Aperçu WhatsApp, Statuts, Groupes) -->
+  <meta property="og:site_name" content="{{ SHOP_NAME }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}{{ SHOP_NAME }} : Pagnes Africains & Wax de Qualite a Cotonou{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Decouvrez notre catalogue exclusif de 35 pagnes (Veritable ABC Wax et Super Chiganvy). Commandes WhatsApp directes 24h/24 et 7j/7 !{% endblock %}">
+  <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endblock %}">
+  <meta property="og:image:secure_url" content="{% block og_image_secure %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endblock %}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}{{ SHOP_NAME }} : Pagnes Africains & Wax de Qualite{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Commandez vos pagnes Wax en ligne 24h/24 et 7j/7 avec livraison ou retrait direct a Cotonou.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endblock %}">
+  <link rel="image_src" href="{% block image_src %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endblock %}">
 
   <!-- 📲 Application installable (PWA) -->
   <link rel="manifest" href="{% url 'shop:manifest' %}">
@@ -26,7 +46,9 @@
         <span class="brand-logo-img"><img src="{% static 'icons/icon-192.png' %}" alt="{{ SHOP_NAME }}" width="36" height="36"></span>
         <span class="brand-name">{{ SHOP_NAME }}</span>
       </a>
-      <nav class="nav-links" aria-label="Navigation principale">
+
+      <!-- Menu Desktop -->
+      <nav class="nav-links desktop-only" aria-label="Navigation principale">
         <a href="{% url 'shop:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Accueil</a>
         <a href="{% url 'shop:catalogue' %}" class="{% if request.resolver_match.url_name == 'catalogue' or request.resolver_match.url_name == 'product_detail' %}active{% endif %}">Catalogue</a>
         <a href="{% url 'shop:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
@@ -34,12 +56,70 @@
           🧺 Panier <span class="cart-count" hidden>0</span>
         </a>
       </nav>
-      <a class="btn btn-whatsapp btn-sm header-cta" href="{% whatsapp_link %}" target="_blank" rel="noopener">
+
+      <a class="btn btn-whatsapp btn-sm header-cta desktop-only" href="{% whatsapp_link %}" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
         <span>WhatsApp</span>
       </a>
+
+      <!-- Actions Mobile (Panier rapide + Bouton 3 tirets) -->
+      <div class="mobile-header-actions mobile-only">
+        <a href="{% url 'shop:panier' %}" class="mobile-cart-btn" aria-label="Mon panier">
+          <span>🧺</span>
+          <span class="cart-count mobile-cart-badge" hidden>0</span>
+        </a>
+        <button id="menu-toggle" class="menu-toggle-btn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Tiroir Navigation Mobile -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobile-drawer" class="mobile-drawer" aria-label="Menu mobile" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="brand-logo-img"><img src="{% static 'icons/icon-192.png' %}" alt="{{ SHOP_NAME }}" width="32" height="32"></span>
+        <span class="brand-name">{{ SHOP_NAME }}</span>
+      </div>
+      <button id="drawer-close" class="drawer-close-btn" type="button" aria-label="Fermer le menu">✕</button>
+    </div>
+
+    <nav class="drawer-nav">
+      <a href="{% url 'shop:home' %}" class="drawer-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+        <span class="drawer-link-icon">🏠</span>
+        <span>Accueil</span>
+      </a>
+      <a href="{% url 'shop:catalogue' %}" class="drawer-link {% if request.resolver_match.url_name == 'catalogue' or request.resolver_match.url_name == 'product_detail' %}active{% endif %}">
+        <span class="drawer-link-icon">👗</span>
+        <span>Catalogue des Pagnes</span>
+        <span class="drawer-badge">35</span>
+      </a>
+      <a href="{% url 'shop:panier' %}" class="drawer-link {% if request.resolver_match.url_name == 'panier' %}active{% endif %}">
+        <span class="drawer-link-icon">🧺</span>
+        <span>Mon Panier</span>
+        <span class="cart-count drawer-cart-count" hidden>0</span>
+      </a>
+      <a href="{% url 'shop:contact' %}" class="drawer-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+        <span class="drawer-link-icon">📍</span>
+        <span>Contact &amp; Localisation</span>
+      </a>
+    </nav>
+
+    <div class="drawer-footer">
+      <a class="btn btn-whatsapp btn-block" href="{% whatsapp_link %}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+        <span>Commander sur WhatsApp</span>
+      </a>
+      <a class="btn btn-outline btn-block" href="tel:{{ SHOP_PHONE_TEL }}">
+        📞 Appeler : {{ SHOP_PHONE_DISPLAY }}
+      </a>
+      <p class="drawer-hours">🕒 Commandes WhatsApp en continu 24h/24 et 7j/7</p>
+    </div>
+  </aside>
 
   <main>
     {% block content %}{% endblock %}

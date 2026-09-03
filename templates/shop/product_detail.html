@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
-{% load shop_tags %}
+{% load static shop_tags %}
 
 {% block title %}{{ produit.name }} (Réf. {{ produit.reference }}) : {{ SHOP_NAME }}{% endblock %}
+
+{% block og_type %}product{% endblock %}
+{% block og_title %}{{ produit.name }} ({{ produit.price|fcfa }}) : {{ SHOP_NAME }}{% endblock %}
+{% block og_description %}{{ produit.short_description|default:produit.description|default:produit.motif|truncatewords:20 }} : Commandez directement sur WhatsApp au {{ SHOP_WHATSAPP_DISPLAY }}.{% endblock %}
+{% block og_image %}{% if produit.image %}{{ request.scheme }}://{{ request.get_host }}{{ produit.image.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endif %}{% endblock %}
+{% block og_image_secure %}{% if produit.image %}{{ request.scheme }}://{{ request.get_host }}{{ produit.image.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endif %}{% endblock %}
+{% block twitter_title %}{{ produit.name }} ({{ produit.price|fcfa }}){% endblock %}
+{% block twitter_description %}{{ produit.short_description|default:produit.description|default:produit.motif|truncatewords:20 }}{% endblock %}
+{% block twitter_image %}{% if produit.image %}{{ request.scheme }}://{{ request.get_host }}{{ produit.image.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endif %}{% endblock %}
+{% block image_src %}{% if produit.image %}{{ request.scheme }}://{{ request.get_host }}{{ produit.image.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endif %}{% endblock %}
 
 {% block content %}
 <nav class="breadcrumb container" aria-label="Fil d'Ariane">
