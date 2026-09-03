@@ -10,19 +10,25 @@ from .models import Category, Product
 PRIX_FILTRES = {
     '6500': {'label': '6 500 FCFA (ABC Wax)', 'min': 6000, 'max': 7000},
     'chiganvy': {'label': '9 000 à 10 000 FCFA (Super Chiganvy)', 'min': 9000, 'max': 10500},
+    '15000': {'label': '15 000 FCFA (Wax Hollandais Vlisco)', 'min': 14000, 'max': 16000},
     'moins10': {'label': 'Moins de 10 000 FCFA', 'max': 10000},
     '10plus': {'label': '10 000 FCFA et plus', 'min': 10000},
 }
 
 
 def home(request):
-    """Accueil : nouveautés, promotions, catégories et sélection de pagnes."""
+    """Accueil compact et rapide : 3 collections, sélection coup de cœur et commande WhatsApp."""
     categories = Category.objects.prefetch_related('products').all()
+    # Sélection de 6 à 8 pagnes équilibrés entre les collections
+    coups_de_coeur = (
+        Product.objects.filter(is_available=True)
+        .select_related('category')
+        .order_by('-is_promo', '-is_new', 'price')[:8]
+    )
     return render(request, 'shop/home.html', {
         'categories': categories,
-        'nouveautes': Product.objects.filter(is_available=True, is_new=True).select_related('category')[:4],
-        'promos': Product.objects.filter(is_available=True, is_promo=True).select_related('category')[:4],
-        'populaires': Product.objects.filter(is_available=True).select_related('category')[:8],
+        'coups_de_coeur': coups_de_coeur,
+        'total_count': Product.objects.count(),
     })
 
 

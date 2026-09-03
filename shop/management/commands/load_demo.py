@@ -1,5 +1,5 @@
 """
-Charge le catalogue complet de démonstration SHM Shop (35 pagnes réels avec photos)
+Charge le catalogue complet de démonstration SHM Shop (57 pagnes réels avec photos)
 et initialise le compte administrateur si absent.
 
     python manage.py load_demo
@@ -11,24 +11,233 @@ from shop.models import Category, Product
 
 CATEGORIES = [
     {
+        'slug': 'wax-hollandais',
+        'name': 'Véritable Wax Hollandais (Vlisco)',
+        'description': 'Véritable Wax Hollandais Vlisco (100% coton premium, 6 yards). Motifs iconiques, éclat longue durée et prestige garanti.',
+        'icon': '👑',
+        'order': 1,
+    },
+    {
         'slug': 'abc-wax',
         'name': 'Véritable ABC Wax',
         'description': 'Collection Véritable ABC Wax 100% coton (6 yards). Motifs vibrants, qualité garantie, parfait pour toutes les tenues.',
         'icon': '✨',
-        'order': 1,
+        'order': 2,
     },
     {
         'slug': 'super-chiganvy',
         'name': 'Super Chiganvy Wax',
         'description': 'Pagne Wax Super Chiganvy de qualité supérieure (100% coton, 6 yards). Doux, résistant et élégant.',
         'icon': '💎',
-        'order': 2,
+        'order': 3,
     },
 ]
 
 PAGNES = [
     # =========================================================================
-    # 1. VÉRITABLE ABC WAX (25 pagnes à 6 500 FCFA)
+    # 1. VÉRITABLE WAX HOLLANDAIS (VLISCO) (22 pagnes à 15 000 FCFA)
+    # =========================================================================
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-01', 'name': "Wax Hollandais 14-5985",
+        'price': 15000, 'old_price': 17500,
+        'motif': "Jaune soleil et noir / calices floraux et filigranes",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Imprimé en Hollande, éclat et prestige incomparables.",
+        'image': 'products/IMG-20260903-WA0045.jpg',
+        'is_new': True, 'is_promo': True, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-02', 'name': "Wax Hollandais Tableau d'École 14-5974",
+        'price': 15000, 'old_price': None,
+        'motif': "Rose poudré, bleu ciel et ardoise de classe",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Motif iconique tableau scolaire, symbolique et recherché.",
+        'image': 'products/IMG-20260903-WA0046.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-03', 'name': "Wax Hollandais Losanges Impériaux 14-5977",
+        'price': 15000, 'old_price': None,
+        'motif': "Or, marron cacao et losanges damiers",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Un chef-d'œuvre d'élégance aux tons chauds dorés et cacao.",
+        'image': 'products/IMG-20260903-WA0047.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-04', 'name': "Wax Hollandais Palmes Cobalt 14-6108",
+        'price': 15000, 'old_price': 18000,
+        'motif': "Bleu roi, or moutarde et palmettes",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Bleu royal et nuances dorées intenses pour cérémonies.",
+        'image': 'products/IMG-20260903-WA0048.jpg',
+        'is_new': True, 'is_promo': True, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-05', 'name': "Wax Hollandais Chevaux du Sahel 14-6106",
+        'price': 15000, 'old_price': None,
+        'motif': "Vert anis et étalons bondissants orange",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Motif cheval mythique et dynamique sur vert vibrant.",
+        'image': 'products/IMG-20260903-WA0049.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-06', 'name': "Wax Hollandais Violet Étoilé",
+        'price': 15000, 'old_price': None,
+        'motif': "Violet cyclamen et rosaces géométriques",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Harmonie précieuse de violet intense et noir.",
+        'image': 'products/IMG-20260903-WA0050.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-07', 'name': "Wax Hollandais Parfum & Palmes",
+        'price': 15000, 'old_price': None,
+        'motif': "Vert émeraude vif et grandes feuilles de palmier",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Végétation luxuriante émeraude et fraîcheur tropicale.",
+        'image': 'products/IMG-20260903-WA0051.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-08', 'name': "Wax Hollandais Poissons d'Or & Parfum",
+        'price': 15000, 'old_price': 17500,
+        'motif': "Jaune soleil, carpes pourpres et motifs aquatiques",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Motif poisson symbole de richesse et de fertilité.",
+        'image': 'products/IMG-20260903-WA0052.jpg',
+        'is_new': False, 'is_promo': True, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-09', 'name': "Wax Hollandais Ardoise Corail & Chiffres",
+        'price': 15000, 'old_price': None,
+        'motif': "Orange corail, bleu marine et chiffres d'école",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Motif traditionnel prisé des grandes dames.",
+        'image': 'products/IMG-20260903-WA0053.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-10', 'name': "Wax Hollandais Écailles d'Indigo",
+        'price': 15000, 'old_price': None,
+        'motif': "Bleu nuit, vert olive et motifs écailles perlées",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Texture visuelle riche et contraste subtil.",
+        'image': 'products/IMG-20260903-WA0054.jpg',
+        'is_new': False, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-11', 'name': "Wax Hollandais Paons Royaux 14-1033",
+        'price': 15000, 'old_price': None,
+        'motif': "Bleu royal et paons dorés majestueux",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Majesté des paons sur fond bleu cobalt intense.",
+        'image': 'products/IMG-20260903-WA0055.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-12', 'name': "Wax Hollandais Roues & Éventails Kaki",
+        'price': 15000, 'old_price': None,
+        'motif': "Kaki olive et rosaces solaires blanches",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Rosaces géométriques parfaites pour robes de soirée.",
+        'image': 'products/IMG-20260903-WA0056.jpg',
+        'is_new': False, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-13', 'name': "Wax Hollandais Losanges Étoilés 14-6000",
+        'price': 15000, 'old_price': 17500,
+        'motif': "Bleu ciel, noir et étoiles bordeaux",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Quadrillage damier et étoiles précieuses.",
+        'image': 'products/IMG-20260903-WA0057.jpg',
+        'is_new': False, 'is_promo': True, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-14', 'name': "Wax Hollandais Cadrans Solaires 14-6202",
+        'price': 15000, 'old_price': None,
+        'motif': "Gris souris, or et cadrans d'horloge",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Motif temps et prospérité ultra élégant.",
+        'image': 'products/IMG-20260903-WA0058.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-15', 'name': "Wax Hollandais Cloches Royales",
+        'price': 15000, 'old_price': None,
+        'motif': "Bordeaux rubis, jaune soleil et calices or",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Couleurs de fête chaleureuses et éclatantes.",
+        'image': 'products/IMG-20260903-WA0059.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-16', 'name': "Wax Hollandais Damier Cacao 14-6121",
+        'price': 15000, 'old_price': None,
+        'motif': "Marron chocolat, jaune anis et damier perlé",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Graphisme affirmé aux teintes chaudes d'Afrique.",
+        'image': 'products/IMG-20260903-WA0060.jpg',
+        'is_new': False, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-17', 'name': "Wax Hollandais Étoiles Mauves & Or",
+        'price': 15000, 'old_price': None,
+        'motif': "Mauve impérial, noir et étoiles filigranées",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Un mauve rare rehaussé de doré somptueux.",
+        'image': 'products/IMG-20260903-WA0061.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-18', 'name': "Wax Hollandais Épis & Chevrons d'Or",
+        'price': 15000, 'old_price': None,
+        'motif': "Jaune soleil, noir et chevrons graphiques",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Géométrie moderne et rayonnement lumineux.",
+        'image': 'products/IMG-20260903-WA0062.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-19', 'name': "Wax Hollandais Fleurs d'Oranger 14-6118",
+        'price': 15000, 'old_price': None,
+        'motif': "Bleu cobalt strié et corolles orange et blanc",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Ravissantes fleurs éclatantes sur rayures cobalt.",
+        'image': 'products/IMG-20260903-WA0063.jpg',
+        'is_new': False, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-20', 'name': "Wax Hollandais Jardin de Hollande",
+        'price': 15000, 'old_price': None,
+        'motif': "Jaune d'or, blanc et feuillages noirs et bleus",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Feuilles et fleurs d'une finesse artisanale.",
+        'image': 'products/IMG-20260903-WA0064.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-21', 'name': "Wax Hollandais Oiseaux Fleuris 14-1133",
+        'price': 15000, 'old_price': 18000,
+        'motif': "Violet, jaune canari et oiseaux perchés",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Oiseaux chanteurs dans des branches fleuries.",
+        'image': 'products/IMG-20260903-WA0065.jpg',
+        'is_new': False, 'is_promo': True, 'is_available': True,
+    },
+    {
+        'category_slug': 'wax-hollandais',
+        'reference': 'SHM-HOLL-22', 'name': "Wax Hollandais Damier 500 Pièces",
+        'price': 15000, 'old_price': None,
+        'motif': "Terre de Sienne, vert prairie et carreaux blancs",
+        'description': "Véritable Wax Hollandais Vlisco 100% coton (6 yards). Motif prestige collection 500pcs aux couleurs chaudes.",
+        'image': 'products/IMG-20260903-WA0066.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+
+    # =========================================================================
+    # 2. VÉRITABLE ABC WAX (25 pagnes à 6 500 FCFA)
     # =========================================================================
     {
         'category_slug': 'abc-wax',
@@ -257,7 +466,7 @@ PAGNES = [
     },
 
     # =========================================================================
-    # 2. SUPER CHIGANVY WAX (10 pagnes à 9 000 / 10 000 FCFA)
+    # 3. SUPER CHIGANVY WAX (10 pagnes à 9 000 / 10 000 FCFA)
     # =========================================================================
     {
         'category_slug': 'super-chiganvy',
@@ -353,13 +562,10 @@ PAGNES = [
 
 
 class Command(BaseCommand):
-    help = 'Charge les catégories et le catalogue complet SHM Shop (35 pagnes).'
+    help = 'Charge les catégories et le catalogue complet SHM Shop (57 pagnes).'
 
     def handle(self, *args, **options):
-        # 1. Nettoyage de l'ancienne catégorie orientar-kingtex
-        Category.objects.filter(slug='orientar-kingtex').delete()
-
-        # 2. Catégories
+        # 1. Catégories
         cats = {}
         for cdata in CATEGORIES:
             cat, _ = Category.objects.update_or_create(
@@ -369,7 +575,7 @@ class Command(BaseCommand):
             cats[cdata['slug']] = cat
         self.stdout.write(self.style.SUCCESS(f'{len(cats)} catégorie(s) configurée(s).'))
 
-        # 3. Produits
+        # 2. Produits
         created = 0
         for pdata in PAGNES:
             data = dict(pdata)
@@ -382,15 +588,12 @@ class Command(BaseCommand):
             )
             created += int(was_created)
 
-        # Nettoyage des anciennes références SHM-ORI si présentes
-        Product.objects.filter(reference__startswith='SHM-ORI').delete()
-
         total = Product.objects.count()
         self.stdout.write(self.style.SUCCESS(
             f'{created} pagne(s) créé(s) / {total} pagne(s) au total dans le catalogue.'
         ))
 
-        # 4. Compte administrateur démo si absent
+        # 3. Compte administrateur démo si absent
         admin_user = 'shmadmin'
         admin_pass = 'shmshop2026'
         admin_email = 'contact@shmshop.bj'

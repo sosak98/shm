@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: shm-shop
+    name: shm-wax-benin
     runtime: python
     region: frankfurt
     plan: free
