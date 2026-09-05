@@ -1,49 +1,99 @@
-# ✨ SHM Shop : Boutique de Pagnes et Wax Africains à Cotonou
+# ✨ SHM Shop — Boutique en Ligne de Pagnes & Wax Africains
 
-Catalogue en ligne moderne et optimisé mobile **sans paiement en ligne** :
-le client parcourt, ajoute au **panier**, puis envoie sa commande en
-**un seul message WhatsApp pré-rempli** directement à la vendeuse.
+Plateforme e-commerce moderne, rapide et optimisée pour smartphone, conçue pour les boutiques de vente de pagnes à Cotonou et en Afrique de l'Ouest.
 
-```
-Client -> Catalogue -> Pagne -> 🧺 Panier -> [ Commander ] -> 📱 WhatsApp -> Vendeuse
-```
-
-## ✨ Les 3 Collections Officielles (57 pagnes réels en stock)
-
-1. 👑 **Véritable Wax Hollandais (Vlisco)** : 22 modèles exclusifs à **15 000 FCFA**
-2. ✨ **Véritable ABC Wax** : 25 modèles 100% coton à **6 500 FCFA**
-3. 💎 **Super Chiganvy Wax** : 10 modèles prestige à **9 000 FCFA / 10 000 FCFA**
-
-## 📞 Coordonnées
-- 💬 **WhatsApp Commandes :** `+229 96 43 77 08` (commandes 24h/24 et 7j/7)
-- 📞 **Ligne Directe Appels :** `+229 01 44 76 75 24`
-- 📍 **Localisation :** Cotonou, Bénin
-- 🕒 **Disponibilité :** 24h/24 et 7j/7
+Le modèle d'achat est basé sur le **panier sans paiement en ligne obligatoire** : le client choisit ses modèles, ajuste les quantités et valide sa commande en **un clic sur WhatsApp** avec un récapitulatif clair et structuré envoyé directement à la boutique.
 
 ---
 
-## ⬆️ Pousser sur GitHub
+## 👗 Les 6 Collections en Stock (95 modèles réels)
+
+1. 👑 **Véritable Vlisco Wax** : Wax Hollandais authentique 100% coton haut de gamme (**50 000 FCFA**) — *12 modèles*
+2. 💎 **Faux Super Wax** : Imitation Super Wax soignée et éclatante (**15 000 FCFA**) — *9 modèles*
+3. ✨ **Faux Vlisco Wax** : Imitation style hollandais aux motifs classiques (**15 000 FCFA**) — *22 modèles*
+4. 🧵 **Super Chiganvy Wax** : Wax résistant et élégant en 6 yards (**9 000 à 10 000 FCFA**) — *10 modèles*
+5. 🌸 **Véritable ABC Wax** : Coton doux et motifs traditionnels colorés (**6 500 FCFA**) — *25 modèles*
+6. 🌿 **Pagne Simple** : Modèles accessibles pour le quotidien (séries Glory Wax & Chigan DAHO) (**2 500 FCFA**) — *17 modèles*
+
+---
+
+## 🚀 Fonctionnalités Clés
+
+- 📱 **Mobile-First & PWA** : Application installable sur Android et iOS, fonctionnant hors-ligne grâce au Service Worker.
+- 🧺 **Panier Intelligent** : Gestion fluide en local (`localStorage`), calcul en direct des totaux en FCFA.
+- 💬 **Génération de Commande WhatsApp** : Message préformaté prêt à l'envoi avec les références, noms, prix et total.
+- ⚡ **Filtres Avancés** : Recherche instantanée, onglets par collection, filtres par budget (2 500 F, 6 500 F, 9 000-10 000 F, 15 000 F, 50 000 F) et promotions.
+- 🛡️ **Keep-Alive Uptime** : Point de terminaison `/health/` pour monitoring continu sans mise en veille.
+- 🎨 **Administration Moderne** : Interface de gestion Django avec aperçu visuel des tissus et gestion de stock.
+
+---
+
+## 💻 Installation & Démarrage Local
+
+### 1. Prérequis
+- Python 3.10+
+- `pip` et `venv`
+
+### 2. Démarrage rapide
 
 ```bash
+# 1. Cloner ou extraire le projet
 cd shmshop
-git init
-git add .
-git commit -m "🚀 SHM Shop v6 : 57 pagnes (Wax Hollandais, ABC Wax, Chiganvy), Accueil compact et Mobile First"
-git branch -M main
-git remote add origin https://github.com/sosak98/shm.git
-git push -u origin main --force
+
+# 2. Créer l'environnement virtuel
+python3 -m venv .venv
+source .venv/bin/activate  # Sur Windows : .venv\Scripts\activate
+
+# 3. Installer les dépendances
+pip install -r requirements.txt
+
+# 4. Appliquer les migrations et charger le catalogue complet (95 pagnes)
+python manage.py migrate
+python manage.py load_demo
+
+# 5. Lancer le serveur de développement
+python manage.py runserver
 ```
 
-## 🌍 Déploiement Automatique 1-Clic avec Render Blueprint
+L'application est alors disponible sur `http://127.0.0.1:8000/`.
 
-1. Sur [Render.com](https://dashboard.render.com/), clique sur **New +** ➡️ **Blueprint**.
-2. Sélectionne ton dépôt GitHub **`sosak98/shm`**.
-3. Render configure tout automatiquement (nom de domaine : `shm-wax-benin.onrender.com`).
-4. Colle ton **`DATABASE_URL`** (ton URL PostgreSQL Neon).
-5. Clique sur **Apply** et ton site est déployé en direct ! 🎉
+---
 
-## 🔑 Compte administrateur par défaut
+## 🔐 Administration Sécurisée
 
-- **Utilisateur :** `shmadmin`
-- **Mot de passe :** `shmshop2026`
-- Pour changer le mot de passe : `python3 manage.py changepassword shmadmin`
+Pour créer un compte administrateur personnalisé :
+
+```bash
+python manage.py createsuperuser
+```
+
+L'accès à l'interface d'administration se fait sur `/admin/`.
+
+---
+
+## ⚙️ Variables d'Environnement (Production)
+
+| Variable | Description | Exemple |
+| :--- | :--- | :--- |
+| `DJANGO_SECRET_KEY` | Clé secrète Django | `votre-cle-secrete-aleatoire` |
+| `DJANGO_DEBUG` | Mode débogage (`1` en dev, `0` en prod) | `0` |
+| `DJANGO_ALLOWED_HOSTS` | Domaines autorisés | `.onrender.com,monsite.com` |
+| `DATABASE_URL` | Chaîne de connexion PostgreSQL | `postgres://user:pass@host/db` |
+| `SHOP_WHATSAPP` | Numéro WhatsApp recevant les commandes | `22996437708` |
+
+---
+
+## 🌐 Déploiement en Production (Render / Cloud)
+
+1. Créez un dépôt sur votre compte GitHub / GitLab.
+2. Poussez votre code :
+   ```bash
+   git init
+   git add .
+   git commit -m "Déploiement initial SHM Shop"
+   git branch -M main
+   git remote add origin <URL_DE_VOTRE_DEPOT_GIT>
+   git push -u origin main
+   ```
+3. Connectez votre dépôt sur [Render.com](https://render.com) en utilisant le fichier `render.yaml` fourni (Blueprint) ou comme Web Service Python.
+4. Renseignez vos variables d'environnement dans le tableau de bord Render.

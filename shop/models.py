@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 
 class Category(models.Model):
-    """Catégorie de pagnes (ex: Véritable ABC Wax, Orientar Kingtex, Super Chiganvy Wax)."""
+    """Catégorie de pagnes (ex: Véritable Vlisco Wax, Pagne simple, Véritable ABC Wax)."""
     name = models.CharField('Nom de la catégorie', max_length=100, unique=True)
     slug = models.SlugField('Slug', max_length=100, unique=True, blank=True)
     description = models.TextField('Description', blank=True)
@@ -23,6 +23,23 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.icon} {self.name}'
+
+    @property
+    def price_display(self):
+        """Calcule dynamiquement le prix ou la plage de prix de la catégorie."""
+        prods = self.products.filter(is_available=True)
+        if not prods.exists():
+            prods = self.products.all()
+        if not prods.exists():
+            return ""
+        prices = sorted(list(set(prods.values_list('price', flat=True))))
+        if not prices:
+            return ""
+        min_p = prices[0]
+        max_p = prices[-1]
+        if min_p == max_p:
+            return f"{min_p:,}".replace(',', ' ') + " FCFA"
+        return f"{min_p:,}".replace(',', ' ') + " à " + f"{max_p:,}".replace(',', ' ') + " FCFA"
 
 
 class Product(models.Model):
@@ -59,6 +76,10 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.pk])
+
+    @property
+    def price_display(self):
+        return f"{self.price:,}".replace(',', ' ') + " FCFA"
 
     @property
     def discount_percent(self):

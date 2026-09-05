@@ -11,7 +11,7 @@
   <meta property="og:site_name" content="{{ SHOP_NAME }}">
   <meta property="og:type" content="{% block og_type %}website{% endblock %}">
   <meta property="og:title" content="{% block og_title %}{{ SHOP_NAME }} : Pagnes Africains & Wax de Qualite a Cotonou{% endblock %}">
-  <meta property="og:description" content="{% block og_description %}Decouvrez notre catalogue exclusif de 35 pagnes (Veritable ABC Wax et Super Chiganvy). Commandes WhatsApp directes 24h/24 et 7j/7 !{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Decouvrez notre catalogue exclusif de pagnes et Wax de qualite a Cotonou. Commandes WhatsApp directes 24h/24 et 7j/7 !{% endblock %}">
   <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
   <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endblock %}">
   <meta property="og:image:secure_url" content="{% block og_image_secure %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-banner.jpg' %}{% endblock %}">
@@ -96,7 +96,6 @@
       <a href="{% url 'shop:catalogue' %}" class="drawer-link {% if request.resolver_match.url_name == 'catalogue' or request.resolver_match.url_name == 'product_detail' %}active{% endif %}">
         <span class="drawer-link-icon">👗</span>
         <span>Catalogue des Pagnes</span>
-        <span class="drawer-badge">35</span>
       </a>
       <a href="{% url 'shop:panier' %}" class="drawer-link {% if request.resolver_match.url_name == 'panier' %}active{% endif %}">
         <span class="drawer-link-icon">🧺</span>

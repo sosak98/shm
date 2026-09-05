@@ -8,9 +8,11 @@ from .models import Category, Product
 
 # Filtres de prix du catalogue (?prix=...)
 PRIX_FILTRES = {
+    '2500': {'label': '2 500 FCFA (Pagne simple)', 'min': 2000, 'max': 3500},
     '6500': {'label': '6 500 FCFA (ABC Wax)', 'min': 6000, 'max': 7000},
     'chiganvy': {'label': '9 000 à 10 000 FCFA (Super Chiganvy)', 'min': 9000, 'max': 10500},
-    '15000': {'label': '15 000 FCFA (Wax Hollandais Vlisco)', 'min': 14000, 'max': 16000},
+    '15000': {'label': '15 000 FCFA (Faux Vlisco & Faux Super)', 'min': 14000, 'max': 16000},
+    '50000': {'label': '50 000 FCFA (Véritable Vlisco)', 'min': 45000, 'max': 55000},
     'moins10': {'label': 'Moins de 10 000 FCFA', 'max': 10000},
     '10plus': {'label': '10 000 FCFA et plus', 'min': 10000},
 }
@@ -83,6 +85,7 @@ def catalogue(request):
         'prix': prix,
         'prix_filtres': PRIX_FILTRES,
         'q': q,
+        'total_count': Product.objects.count(),
     })
 
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load shop_tags %}
 
-{% block title %}{% if selected_cat %}{{ selected_cat.name }} ({{ selected_cat.products.count }}) : {{ SHOP_NAME }}{% else %}Catalogue complet (57 pagnes) : {{ SHOP_NAME }}{% endif %}{% endblock %}
+{% block title %}{% if selected_cat %}{{ selected_cat.name }} ({{ selected_cat.products.count }}) : {{ SHOP_NAME }}{% else %}Catalogue des Pagnes : {{ SHOP_NAME }}{% endif %}{% endblock %}
 
 {% block content %}
 <section class="catalogue-top">
@@ -18,7 +18,7 @@
       <div class="cat-tabs-scroll">
         <a class="cat-tab-item {% if not cat_slug %}active{% endif %}" href="{% url 'shop:catalogue' %}{% if filtre %}?f={{ filtre }}{% endif %}{% if prix %}&prix={{ prix }}{% endif %}">
           <span>Tous</span>
-          <span class="cat-tab-badge">57</span>
+          <span class="cat-tab-badge">{{ total_count }}</span>
         </a>
         {% for cat in categories %}
         <a class="cat-tab-item {% if cat_slug == cat.slug %}active{% endif %}" href="?cat={{ cat.slug }}{% if filtre %}&f={{ filtre }}{% endif %}{% if prix %}&prix={{ prix }}{% endif %}">
@@ -41,9 +41,9 @@
       <div class="catalogue-selects">
         <select name="prix" onchange="this.form.submit()" aria-label="Filtrer par prix">
           <option value="">Tous les prix</option>
-          <option value="6500" {% if prix == '6500' %}selected{% endif %}>6 500 F (ABC Wax)</option>
-          <option value="chiganvy" {% if prix == 'chiganvy' %}selected{% endif %}>9 000 à 10 000 F (Super Chiganvy)</option>
-          <option value="15000" {% if prix == '15000' %}selected{% endif %}>15 000 F (Wax Hollandais)</option>
+          {% for key, f_data in prix_filtres.items %}
+            <option value="{{ key }}" {% if prix == key %}selected{% endif %}>{{ f_data.label }}</option>
+          {% endfor %}
         </select>
 
         <select name="f" onchange="this.form.submit()" aria-label="Filtrer par statut">
@@ -70,7 +70,7 @@
         <div class="empty">
           <div class="empty-emoji">🧺</div>
           <p>Aucun pagne ne correspond à vos filtres.</p>
-          <a class="btn btn-outline btn-sm" href="{% url 'shop:catalogue' %}">Voir tout le catalogue (57)</a>
+          <a class="btn btn-outline btn-sm" href="{% url 'shop:catalogue' %}">Voir tout le catalogue</a>
         </div>
       {% endfor %}
     </div>
