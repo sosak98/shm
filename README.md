@@ -6,7 +6,7 @@ Le modèle d'achat est basé sur le **panier sans paiement en ligne obligatoire*
 
 ---
 
-## 👗 Les 6 Collections en Stock (95 modèles réels)
+## 👗 Les 7 Collections en Stock (108 modèles réels)
 
 1. 👑 **Véritable Vlisco Wax** : Wax Hollandais authentique 100% coton haut de gamme (**50 000 FCFA**) — *12 modèles*
 2. 💎 **Faux Super Wax** : Imitation Super Wax soignée et éclatante (**15 000 FCFA**) — *9 modèles*
@@ -14,6 +14,7 @@ Le modèle d'achat est basé sur le **panier sans paiement en ligne obligatoire*
 4. 🧵 **Super Chiganvy Wax** : Wax résistant et élégant en 6 yards (**9 000 à 10 000 FCFA**) — *10 modèles*
 5. 🌸 **Véritable ABC Wax** : Coton doux et motifs traditionnels colorés (**6 500 FCFA**) — *25 modèles*
 6. 🌿 **Pagne Simple** : Modèles accessibles pour le quotidien (séries Glory Wax & Chigan DAHO) (**2 500 FCFA**) — *17 modèles*
+7. 🌟 **Petit Super Lomé** : Pagnes Super Wax aux motifs graphiques et colorés (**12 000 FCFA**) — *13 modèles*
 
 ---
 
@@ -47,7 +48,7 @@ source .venv/bin/activate  # Sur Windows : .venv\Scripts\activate
 # 3. Installer les dépendances
 pip install -r requirements.txt
 
-# 4. Appliquer les migrations et charger le catalogue complet (95 pagnes)
+# 4. Appliquer les migrations et charger le catalogue complet (108 pagnes)
 python manage.py migrate
 python manage.py load_demo
 

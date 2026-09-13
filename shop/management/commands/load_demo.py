@@ -1,5 +1,5 @@
 """
-Charge le catalogue complet SHM Shop (6 catégories, 95 pagnes réels avec photos)
+Charge le catalogue complet SHM Shop (7 catégories, 108 pagnes réels avec photos)
 et initialise le compte administrateur si absent.
 
     python manage.py load_demo
@@ -51,6 +51,13 @@ CATEGORIES = [
         'description': 'Pagne simple 100% coton (6 yards). Motifs variés et colorés, tissu léger et très accessible pour le quotidien.',
         'icon': '🌿',
         'order': 6,
+    },
+    {
+        'slug': 'petit-super-lome',
+        'name': 'Petit Super Lomé',
+        'description': 'Collection Petit Super Lomé : pagnes Super Wax aux motifs graphiques et colorés, proposés au prix de 12 000 FCFA.',
+        'icon': '🌟',
+        'order': 7,
     },
 ]
 
@@ -933,11 +940,132 @@ PAGNES = [
         'image': 'products/IMG-20260904-WA0065.jpg',
         'is_new': True, 'is_promo': True, 'is_available': True,
     },
+
+    # =========================================================================
+    # 7. PETIT SUPER LOMÉ (13 pagnes à 12 000 FCFA)
+    # =========================================================================
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-01', 'name': 'Petit Super Lomé Rouge Brique & Olive',
+        'price': 12000, 'old_price': None,
+        'motif': 'Rouge brique, vert olive, bleu nuit et crème / arcs graphiques et motifs végétaux',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Rouge brique, vert olive et bleu nuit / arcs graphiques et feuillages. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-01.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-02', 'name': 'Petit Super Lomé Moutarde & Aubergine',
+        'price': 12000, 'old_price': None,
+        'motif': 'Jaune moutarde, aubergine, beige et noir / grandes feuilles aux lignes ondulées',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Jaune moutarde, aubergine et beige / grandes feuilles graphiques. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-02.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-03', 'name': 'Petit Super Lomé Indigo & Orange',
+        'price': 12000, 'old_price': None,
+        'motif': 'Bleu indigo, lavande, orange et ocre / petites feuilles sur fond graphique',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Indigo, lavande et orange / feuilles stylisées. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-03.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-04', 'name': 'Petit Super Lomé Émeraude & Rosaces',
+        'price': 12000, 'old_price': None,
+        'motif': 'Vert émeraude, vert anis, lavande et crème / rosaces et feuillages',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Vert émeraude et lavande / rosaces florales et feuillages. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-04.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-05', 'name': 'Petit Super Lomé Lavande & Prune',
+        'price': 12000, 'old_price': None,
+        'motif': 'Lavande, prune, violet et ocre / éventails et formes végétales',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Lavande, prune et ocre / éventails floraux. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-05.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-06', 'name': 'Petit Super Lomé Fuchsia & Citron',
+        'price': 12000, 'old_price': None,
+        'motif': 'Fuchsia, vert citron, lilas et bleu / gouttes et feuilles stylisées',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Fuchsia et vert citron / motifs en forme de gouttes. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-06.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-07', 'name': 'Petit Super Lomé Sauge & Bleu Canard',
+        'price': 12000, 'old_price': None,
+        'motif': 'Vert sauge, bleu canard, turquoise et noir / feuilles et peignes graphiques',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Vert sauge et bleu canard / feuilles graphiques. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-07.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-08', 'name': 'Petit Super Lomé Lilas & Grandes Fleurs',
+        'price': 12000, 'old_price': None,
+        'motif': 'Lilas, violet, blanc et noir / grandes fleurs et petites baies',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Lilas et violet / grandes fleurs et feuillages. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-08.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-09', 'name': 'Petit Super Lomé Beige & Prune',
+        'price': 12000, 'old_price': None,
+        'motif': 'Beige, prune, violet et noir / éventails et arabesques',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Beige et prune / éventails graphiques. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-09.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-10', 'name': 'Petit Super Lomé Rose Poudré & Indigo',
+        'price': 12000, 'old_price': None,
+        'motif': 'Rose poudré, indigo, violet et noir / grandes feuilles stylisées',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Rose poudré et indigo / grandes feuilles. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-10.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-11', 'name': 'Petit Super Lomé Vert Émeraude Rosaces',
+        'price': 12000, 'old_price': None,
+        'motif': 'Vert émeraude, vert clair, violet et crème / rosaces et feuilles',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Vert émeraude et crème / rosaces florales. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-11.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-12', 'name': 'Petit Super Lomé Rouge Brique & Gris',
+        'price': 12000, 'old_price': None,
+        'motif': 'Rouge brique, gris perle, noir et ocre / grandes feuilles graphiques',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Rouge brique et gris perle / feuillage graphique. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-12.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
+    {
+        'category_slug': 'petit-super-lome',
+        'reference': 'SHM-PSL-13', 'name': 'Petit Super Lomé Orange & Turquoise',
+        'price': 12000, 'old_price': None,
+        'motif': 'Orange, turquoise, vert olive et bleu nuit / feuilles et formes de gouttes',
+        'description': 'Pagne Petit Super Lomé (6 yards) à 12 000 FCFA. Orange et turquoise / feuilles stylisées. Une collection colorée et élégante pour vos créations.',
+        'image': 'products/petit-super-lome-13.jpg',
+        'is_new': True, 'is_promo': False, 'is_available': True,
+    },
 ]
 
 
 class Command(BaseCommand):
-    help = 'Charge les catégories et le catalogue complet SHM Shop (95 pagnes).'
+    help = 'Charge les catégories et le catalogue complet SHM Shop (108 pagnes).'
 
     def handle(self, *args, **options):
         # 1. Catégories
